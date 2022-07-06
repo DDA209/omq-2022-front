@@ -1,0 +1,65 @@
+html {
+	background-color: #f4c00008;
+	min-height: 100vh;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	font-size: calc(10px + 2vmin);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	color: #832d1eff;
+}
+
+h6 {
+	font-size: calc(1px + 1vmin);
+	margin: 0 0 -0.3rem 3.3rem;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul,
+ol {
+	list-style-type: none;
+	display: inline;
+}
+
+li {
+	display: inline;
+}
+
+a {
+	padding: 0.5rem;
+	margin: 0.2rem;
+	border-radius: 12px;
+}
+
+a:link,
+a:visited {
+	color: inherit;
+}
+
+a:hover {
+	/* color: #ab2000d0;
+	text-shadow: 0 0 5px #ffffffa0; */
+	background-color: #ab200020;
+}
+
+main {
+	margin: 0.5rem 2rem 0;
+}
+
+hr {
+	border-top: solid 3px #832d1eff;
+	height: 0px;
+}
+
+#logoOmq {
+	height: 40vh;
+}
+

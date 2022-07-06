@@ -1,0 +1,95 @@
+nav {
+	background-color: #f4c008ff;
+	border-radius: 12px;
+	border: #832d1eff double 9px;
+	padding: 0px;
+	margin: 1rem 1rem 0;
+	text-align: center;
+}
+
+nav > div {
+	display: flex;
+	background-color: #ffffffd0;
+	padding: calc(1rem - 0px);
+	border-radius: 3px;
+}
+
+nav h2 {
+	display: inline;
+	margin: -0.4 rem 0;
+	text-align: start;
+	flex-shrink: 1;
+}
+
+nav > div > div {
+	flex-grow: 1;
+}
+
+nav #nav-items {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+nav #nav-items > a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+button,
+nav .nav-small-item,
+nav .nav-item {
+	background-color: #f4c008ff;
+	border: solid 3px #832d1eff;
+	box-shadow: 0.2rem 0.2rem 0.2rem -0.05rem #00000080;
+	transition: ease-out 0.2s transform, ease-out 0.2s box-shadow;
+}
+
+nav .nav-item {
+	height: 5rem;
+	width: 5rem;
+	border-radius: 50%;
+}
+
+nav .nav-small-item {
+	border: #832d1eff double 9px;
+	height: 1rem;
+	width: 1rem;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+nav .nav-small-item > div {
+	height: 1rem;
+	width: 1rem;
+	border-radius: 50%;
+	box-shadow: 0 0 0.4rem 0.05rem #ff2c3eff inset,
+		0 0 1.25rem 0.25rem #ff2c3eff;
+
+	background-color: #ffffffff;
+}
+
+nav .nav-small-item > .led-logged {
+	box-shadow: 0 0 0.3rem 0.1rem #57ff15ff inset, 0 0 1.25rem 0.25rem #57ff15ff;
+}
+
+button:hover,
+nav .nav-small-item:hover,
+nav .nav-item:hover {
+	transform: translateY(-0.1rem) translateX(-0.1rem);
+	box-shadow: 0.3rem 0.3rem 0.2rem -0.1rem #00000080;
+}
+button:active,
+nav .nav-small-item:active,
+nav .nav-item:active {
+	transform: translateY(0.1rem) translateX(0.1rem);
+	box-shadow: 0rem 0rem 0rem 0rem #00000080;
+}
+
+nav #admin-items {
+	display: grid;
+}
