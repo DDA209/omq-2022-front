@@ -78,18 +78,22 @@ nav .nav-small-item > .led-logged {
 }
 
 button:hover,
-nav .nav-small-item:hover,
-nav .nav-item:hover {
+nav a:hover .nav-small-item,
+nav a:hover .nav-item {
 	transform: translateY(-0.1rem) translateX(-0.1rem);
 	box-shadow: 0.3rem 0.3rem 0.2rem -0.1rem #00000080;
 }
 button:active,
-nav .nav-small-item:active,
-nav .nav-item:active {
+nav a:active .nav-small-item,
+nav a:active .nav-item {
 	transform: translateY(0.1rem) translateX(0.1rem);
 	box-shadow: 0rem 0rem 0rem 0rem #00000080;
 }
 
 nav #admin-items {
 	display: grid;
+}
+
+.big-button:hover {
+	background-color: #00000000 !important;
 }

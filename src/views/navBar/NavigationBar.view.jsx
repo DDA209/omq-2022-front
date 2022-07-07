@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../App';
 import { Link } from 'react-router-dom';
 
-// import './navBar.css';
+import './navBar.css';
 
 function NavBar() {
-	const [isLogged, setIsLogged] = useState(true);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const { userLogin, setUserLogin } = useContext(AuthContext);
 
-	useEffect(() => {
-		!isLogged && setIsAdmin(false);
-	}, [isLogged]);
+	const onClickLogin = () => {
+		setUserLogin({ ...userLogin, isLogged: true, isAdmin: false });
+		console.log('Clic');
+	};
+
+	const onClickAdmin = () => {
+		setUserLogin({ ...userLogin, isLogged: true, isAdmin: true });
+		console.log('Clic');
+	};
 
 	const renderAdmin = () => {
 		return (
@@ -24,13 +30,17 @@ function NavBar() {
 	};
 
 	const renderLogButton = () => {
-		if (!isLogged) {
+		if (!userLogin?.isLogged) {
 			return (
-				<Link id="login-signin" to="/login_signin">
+				<Link
+					className="big-button"
+					id="login-signin"
+					to="/login_signin"
+				>
 					<div className="nav-small-item">
 						<div></div>
 					</div>
-					Login / Signin
+					<span>Login / Signin</span>
 				</Link>
 			);
 		} else {
@@ -38,7 +48,7 @@ function NavBar() {
 				<a
 					className="big-button"
 					onClick={() => {
-						setIsLogged(false);
+						setUserLogin({ isLogged: false, isAdmin: false });
 					}}
 				>
 					<div className="nav-small-item">
@@ -56,6 +66,24 @@ function NavBar() {
 				<h2>
 					<Link to="/">OMQ</Link>
 				</h2>
+				{!userLogin?.isLogged && (
+					<button
+						type="button"
+						className="btn btn-primary"
+						onClick={onClickLogin}
+					>
+						Login
+					</button>
+				)}{' '}
+				{!userLogin?.isAdmin && (
+					<button
+						type="button"
+						className="btn btn-secondary"
+						onClick={onClickAdmin}
+					>
+						Admin
+					</button>
+				)}
 				<div id="nav-items">
 					<Link
 						className="big-button"
@@ -73,18 +101,11 @@ function NavBar() {
 						<div className="nav-item"></div>
 						<span>Calculate menus</span>
 					</Link>
-					{/* <Link id="login-signin" to="/login_signin">
-						<div className="nav-small-item">
-							<div className={isLogged && 'led-logged'}></div>
-						</div>
-						{!isLogged ? 'Login / Signin' : 'Logout'}
-					</Link> */}
 					{renderLogButton()}
-					{isAdmin && renderAdmin()}
+					{userLogin?.isAdmin && renderAdmin()}
 				</div>
 			</div>
 		</nav>
 	);
 }
-
 export default NavBar;

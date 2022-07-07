@@ -4,7 +4,7 @@ function user() {
 	const [userIdentification, setUserIdentification] = useState({});
 	const [identificationStep, setIdentificationStep] = useState(0);
 
-	const renderForm = () => {
+	const renderForm = (props) => {
 		<FormUserIdentification
 			step={identificationStep}
 			setUserIdentification={setUserIdentification}

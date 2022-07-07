@@ -1,11 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './forms.css';
 
 function FormAddIngredient(props) {
 	const [ingredientName, setIngredientName] = useState();
 	const [ingredientQuantity, setIngredientQuantity] = useState();
+	const [quantityStep, setQuantityStep] = useState(0.001);
 
-	const submitIngredient = () => {
+	useEffect(() => {
+		console.log('cmpt/layout/forms/formAddIngredient #useEffect');
+		switch (true) {
+			case ingredientQuantity < 1:
+				console.log('AAAAAAAAAAAAAAAAAA');
+				setQuantityStep(0.001);
+				break;
+			case ingredientQuantity < 10 && ingredientQuantity >= 1:
+				console.log('BBBBBBBBBBBBBBBBB');
+				setQuantityStep(0.01);
+				break;
+			case ingredientQuantity < 100 && ingredientQuantity >= 10:
+				console.log('CCCCCCCCCCCCCCC');
+				setQuantityStep(0.1);
+				break;
+			case ingredientQuantity >= 100:
+				console.log('DDDDDDDDDDDDDDD');
+				setQuantityStep(1);
+				break;
+			default:
+				break;
+		}
+	}, [ingredientQuantity]);
+
+	const submitIngredient = (event) => {
 		event.preventDefault();
 		console.log(
 			'components forms formAddIngredient JSX #submitIngredient ingredientName : ingredientQuantity >>>',
@@ -18,10 +43,8 @@ function FormAddIngredient(props) {
 	const handleChange = (event) => {
 		console.log(
 			'components forms formAddIngredient JSX #handleChange event.target.value >>>',
-			event.target.value
-		);
-		console.log(
-			'components forms formAddIngredient JSX #handleChange event.target.name >>>',
+			event.target.value,
+			'=',
 			event.target.name
 		);
 		switch (event.target.name) {
@@ -29,27 +52,24 @@ function FormAddIngredient(props) {
 				setIngredientName(event.target.value);
 				break;
 			case 'ingredientQuantity':
+				console.log('CHANGE QUANTITY');
 				setIngredientQuantity(event.target.value);
-				break;
-
-			default:
-				break;
 		}
 	};
 
 	return (
 		<>
 			<form onSubmit={submitIngredient}>
-				<label htmlFor="ingredientNameList">
+				<label htmlFor="ingredient-name">
 					Name:
 					<select
-						id="ingredientNameList"
-						name="ingredientName"
+						id="ingredient-name"
+						className="ingredient-name"
+						name="ingredient-name"
 						type="text"
 						onChange={handleChange}
 					>
-						{' '}
-						<option key="0" value=""></option>
+						<option value=""></option>
 						{props.ingredients.map((ingredient, index) => {
 							return (
 								<option key={index} value={ingredient.name}>
@@ -59,16 +79,16 @@ function FormAddIngredient(props) {
 						})}
 					</select>
 				</label>
-				<label htmlFor="ingredientQuantity">
+				<label htmlFor="ingredient-quantity">
 					Quantity:
 					<input
-						id="ingredientQuantity"
-						name="ingredientQuantity"
+						id="ingredient-quantity"
+						className="ingredient-quantity"
+						name="ingredient-quantity"
 						type="number"
 						min="0"
-						max="100"
-						step="0.001"
-						size="50"
+						max="10000"
+						step={quantityStep || '0.1'}
 						onChange={handleChange}
 					/>
 					kg

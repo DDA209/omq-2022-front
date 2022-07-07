@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../App';
 import params from '../../../params';
 // import FormManageIngredient from '../../components/layout/forms/FormManageIngredient';
 import ManageIngredients from './ManageIngredients.view';
@@ -7,6 +8,10 @@ import ManageIngredients from './ManageIngredients.view';
 const { headers, apiUrl } = params;
 
 function AdminView(props) {
+	const { userLogin } = useContext(AuthContext);
+
+	console.log('useContext(AuthContext)', useContext(AuthContext));
+
 	const [ingredientsAll, setIngrdientAll] = useState([]);
 
 	const getAllIngredients = () => {
@@ -54,8 +59,8 @@ function AdminView(props) {
 		return (
 			<>
 				<ManageIngredients
-					ingredientsAll="ingredientsAll"
-					getAllIngredients={getAllIngredients}
+				// ingredientsAll="ingredientsAll"
+				// getAllIngredients={getAllIngredients}
 				/>
 			</>
 		);

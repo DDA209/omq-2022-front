@@ -1,3 +1,7 @@
+h6 {
+	margin: 0 0 -0.3rem 3.3rem;
+}
+
 form,
 form label,
 form button {
@@ -40,4 +44,13 @@ form button {
 
 form#user-identification-form {
 	display: block;
+}
+
+.ingredient-name {
+	width: 15rem;
+}
+
+.ingredient-quantity,
+.ingredient-volumic-mass {
+	width: 5.5rem;
 }
