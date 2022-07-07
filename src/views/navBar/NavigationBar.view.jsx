@@ -6,6 +6,7 @@ import './navBar.css';
 
 function NavBar() {
 	const { userLogin, setUserLogin } = useContext(AuthContext);
+	console.log('NavBar useContext(AuthContext)', useContext(AuthContext));
 
 	const onClickLogin = () => {
 		setUserLogin({ ...userLogin, isLogged: true, isAdmin: false });

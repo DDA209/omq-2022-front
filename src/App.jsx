@@ -15,35 +15,34 @@ function App() {
 	});
 
 	useEffect(() => {
+		console.log(
+			"useEffect[] localStorage.getItem('userLogin') B",
+			localStorage.getItem('userLogin')
+		);
 		const localStorageUserLogin = JSON.parse(
 			localStorage.getItem('userLogin')
 		);
-
-		console.log(
-			'App #useEffect localStorageUserLogin >>>',
-			localStorageUserLogin
-		);
-		console.log('App #useEffect userLogin A >>>', userLogin);
 		localStorageUserLogin && setUserLogin(localStorageUserLogin);
-		console.log('App #useEffect userLogin B >>>', userLogin);
+		console.log(
+			"useEffect[] localStorage.getItem('userLogin') B",
+			localStorage.getItem('userLogin')
+		);
 	}, []);
 
 	useEffect(() => {
 		localStorage.setItem('userLogin', JSON.stringify(userLogin));
-		console.log(
-			"App #useEffect localStorage.getItem('userLogin') >>>",
-			localStorage.getItem('userLogin')
-		);
 	}, [userLogin]);
 
-	console.log('App.jsx');
 	return (
 		<BrowserRouter>
 			<AuthContext.Provider value={{ userLogin, setUserLogin }}>
 				<NavBar />
 			</AuthContext.Provider>
+
 			<main>
-				<AppRoutes />
+				<AuthContext.Provider value={userLogin.isAdmin}>
+					<AppRoutes />
+				</AuthContext.Provider>
 			</main>
 		</BrowserRouter>
 	);

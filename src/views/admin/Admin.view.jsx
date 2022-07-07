@@ -1,44 +1,14 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../App';
-import params from '../../../params';
-// import FormManageIngredient from '../../components/layout/forms/FormManageIngredient';
+// import FormManageIngredients from '../../components/layout/forms/FormManageIngredients';
 import ManageIngredients from './ManageIngredients.view';
-// import defaultMiddlewares from '../../middlewares/common/defaultMiddlewares';
-
-const { headers, apiUrl } = params;
 
 function AdminView(props) {
 	const { userLogin } = useContext(AuthContext);
-
-	console.log('useContext(AuthContext)', useContext(AuthContext));
-
-	const [ingredientsAll, setIngrdientAll] = useState([]);
-
-	const getAllIngredients = () => {
-		const method = 'GET';
-		const response = fetch(`${apiUrl}/ingredients`, {
-			headers,
-			method,
-		})
-			.then((res) => res.json())
-			.then((result) => {
-				if (!result.success) {
-					return;
-				}
-				const ingredients = result.data.map((ingredient) => {
-					const { _id: id, name, volumicMass } = ingredient;
-					return { id, name, volumicMass };
-				});
-				setIngrdientAll(ingredients);
-			});
-	};
-
-	useEffect(() => {
-		getAllIngredients();
-	}, []);
+	console.log('AdminView useContext(AuthContext)', useContext(AuthContext));
 
 	const renderNoView = () => {
-		return <p>Nothing to display use the correct way</p>;
+		<p>Nothing to display use the correct way</p>;
 	};
 
 	const renderView = (view, index) => {
@@ -47,7 +17,7 @@ function AdminView(props) {
 				<div key={index}>
 					<hr />
 					<h2>Manage ingredients</h2>
-					{ingredientsAll.length > 0 && renderAllIngredients()}
+					{renderAllIngredients()}
 				</div>
 			);
 		} else {
