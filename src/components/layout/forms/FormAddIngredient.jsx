@@ -10,19 +10,18 @@ function FormAddIngredient(props) {
 		console.log('cmpt/layout/forms/formAddIngredient #useEffect');
 		switch (true) {
 			case ingredientQuantity < 1:
-				console.log('AAAAAAAAAAAAAAAAAA');
 				setQuantityStep(0.001);
 				break;
-			case ingredientQuantity < 10 && ingredientQuantity >= 1:
-				console.log('BBBBBBBBBBBBBBBBB');
+			case ingredientQuantity < 1 && ingredientQuantity >= 0.1:
 				setQuantityStep(0.01);
 				break;
+			case ingredientQuantity < 10 && ingredientQuantity >= 1:
+				setQuantityStep(0.1);
+				break;
 			case ingredientQuantity < 100 && ingredientQuantity >= 10:
-				console.log('CCCCCCCCCCCCCCC');
 				setQuantityStep(0.1);
 				break;
 			case ingredientQuantity >= 100:
-				console.log('DDDDDDDDDDDDDDD');
 				setQuantityStep(1);
 				break;
 			default:

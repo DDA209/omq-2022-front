@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import NavBar from './views/navBar/NavigationBar.view';
+import NavBar from './views/navBar/NavBar.view';
 import AppRoutes from './routes';
 
 import './App.css';
@@ -15,18 +15,11 @@ function App() {
 	});
 
 	useEffect(() => {
-		console.log(
-			"useEffect[] localStorage.getItem('userLogin') B",
-			localStorage.getItem('userLogin')
-		);
 		const localStorageUserLogin = JSON.parse(
 			localStorage.getItem('userLogin')
 		);
+
 		localStorageUserLogin && setUserLogin(localStorageUserLogin);
-		console.log(
-			"useEffect[] localStorage.getItem('userLogin') B",
-			localStorage.getItem('userLogin')
-		);
 	}, []);
 
 	useEffect(() => {
@@ -38,9 +31,8 @@ function App() {
 			<AuthContext.Provider value={{ userLogin, setUserLogin }}>
 				<NavBar />
 			</AuthContext.Provider>
-
 			<main>
-				<AuthContext.Provider value={userLogin.isAdmin}>
+				<AuthContext.Provider value={{ userLogin, setUserLogin }}>
 					<AppRoutes />
 				</AuthContext.Provider>
 			</main>

@@ -43,8 +43,8 @@ nav .nav-small-item,
 nav .nav-item {
 	background-color: #f4c008ff;
 	border: solid 3px #832d1eff;
-	box-shadow: 0.2rem 0.2rem 0.2rem -0.05rem #00000080;
-	transition: ease-out 0.2s transform, ease-out 0.2s box-shadow;
+	box-shadow: 0.1rem 0.2rem 0.15rem -0.05rem #00000080;
+	transition: ease-out 0.185s transform, ease-out 0.185s box-shadow;
 }
 
 nav .nav-item {
@@ -71,23 +71,46 @@ nav .nav-small-item > div {
 		0 0 1.25rem 0.25rem #ff2c3eff;
 
 	background-color: #ffffffff;
+	animation: infinite ease-in-out 2s alternate red-button;
+}
+
+nav .nav-small-item > div:hover,
+nav a:hover .nav-small-item > div {
+	animation: none;
+}
+
+nav .nav-small-item > div:active,
+nav a:active .nav-small-item > div {
+	box-shadow: 0 0 0.4rem 0.05rem #c00000ff inset,
+		0 0 1.25rem 0.25rem #ff2c3e00;
+	background-color: #800000ff;
+	animation: none;
 }
 
 nav .nav-small-item > .led-logged {
-	box-shadow: 0 0 0.3rem 0.1rem #57ff15ff inset, 0 0 1.25rem 0.25rem #57ff15ff;
+	box-shadow: 0 0 0.3rem 0.1rem #57ff15ff inset, 0 0 1.25rem 0.25rem #57ff15ff !important;
+	animation: none !important;
+}
+nav .nav-small-item > .led-logged:active,
+nav a:active .nav-small-item > .led-logged {
+	box-shadow: 0 0 0.3rem 0.1rem #2bc010ff inset, 0 0 1.25rem 0.25rem #57ff1500 !important;
+	background-color: #008000ff !important;
+
+	animation: none !important;
 }
 
 button:hover,
 nav a:hover .nav-small-item,
 nav a:hover .nav-item {
 	transform: translateY(-0.1rem) translateX(-0.1rem);
-	box-shadow: 0.3rem 0.3rem 0.2rem -0.1rem #00000080;
+	box-shadow: 0.2rem 0.4rem 0.25rem -0.1rem #00000080;
 }
 button:active,
 nav a:active .nav-small-item,
 nav a:active .nav-item {
 	transform: translateY(0.1rem) translateX(0.1rem);
-	box-shadow: 0rem 0rem 0rem 0rem #00000080;
+	box-shadow: 0rem 0rem 0rem 0rem #00000080,
+		0.05rem 0.05rem 0.1rem -0.05rem #00000080 inset;
 }
 
 nav #admin-items {
@@ -96,4 +119,17 @@ nav #admin-items {
 
 .big-button:hover {
 	background-color: #00000000 !important;
+}
+
+@keyframes red-button {
+	0% {
+		box-shadow: 0 0 0.4rem 0.05rem #ff2c3eff inset,
+			0 0 1.25rem 0.25rem #ff2c3eff;
+		background-color: #ffffff;
+	}
+	25% {
+		box-shadow: 0 0 0.4rem 0.05rem #c00000ff inset,
+			0 0 1.25rem 0.25rem #ff2c3e00;
+		background-color: #800000ff;
+	}
 }

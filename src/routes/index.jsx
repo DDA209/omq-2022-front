@@ -6,16 +6,38 @@ import AdminView from '../views/admin/Admin.view';
 import CaculateMenusView from './../views/caculateMenus/CalculateMenus.view';
 import HomeView from './../views/home/Home.view';
 import IngredientsListView from './../views/ingrdientsList/IngredientLists.view';
+import LoginView from '../views/user/Login.view';
 
 function AppRoutes() {
-	const isAdmin = useContext(AuthContext);
+	const { userLogin } = useContext(AuthContext);
+	const { isAdmin, isLogged } = userLogin;
 	console.log('APPROUTES useContext(AuthContext)', useContext(AuthContext));
+	console.log('APPROUTES isLogged', isLogged);
 
 	return (
 		<Routes>
 			<Route exact path="/" element={<HomeView />} />
 			<Route path="/ingredients" element={<IngredientsListView />} />
 			<Route path="/menus" element={<CaculateMenusView />} />
+			<Route
+				path="/login_register"
+				element={
+					!isLogged ? <LoginView formStep={null} /> : <HomeView />
+				}
+			/>
+			<Route
+				path="/register"
+				element={
+					!isLogged ? <LoginView formStep="register" /> : <HomeView />
+				}
+			/>
+			<Route
+				exact
+				path="/login"
+				element={
+					!isLogged ? <LoginView formStep="login" /> : <HomeView />
+				}
+			/>
 
 			{isAdmin ? (
 				<>

@@ -6,7 +6,7 @@ import defaultMiddlewares from '../../middlewares/common/defaultMiddlewares';
 const { postDocument, getAllDocuments, putDocument, destroyDocument } =
 	defaultMiddlewares;
 
-function ManageIngredients() {
+function ManageIngredientsView() {
 	const [ingredientsAll, setIngredientsAll] = useState([]);
 	const [ingredientNew, setIngredientNew] = useState({
 		name: '',
@@ -131,4 +131,4 @@ function ManageIngredients() {
 	);
 }
 
-export default ManageIngredients;
+export default ManageIngredientsView;

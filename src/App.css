@@ -1,5 +1,5 @@
 html {
-	background-color: #f4c00008;
+	background-color: #fefbefff;
 	min-height: 100vh;
 	flex-direction: column;
 	align-items: center;
@@ -12,6 +12,7 @@ html {
 	padding: 0;
 	border: 0 none;
 	color: #832d1eff;
+	cursor: default;
 }
 
 h6 {
@@ -25,12 +26,12 @@ a {
 ul,
 ol {
 	list-style-type: none;
-	display: inline;
+	/* display: inline; */
 }
 
-li {
+/* li {
 	display: inline;
-}
+} */
 
 a,
 a span {
@@ -50,9 +51,10 @@ a span:hover {
 	background-color: #ab200020;
 }
 
-h2 a,
+button :hover,
+h2 a:hover,
 .big-button:hover {
-	background-color: #00000000 !important;
+	background-color: #00000000;
 }
 
 main {
@@ -66,5 +68,47 @@ hr {
 
 #logoOmq {
 	height: 40vh;
+}
+/** **/
+.in-line {
+	display: inline-flex !important;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.margin-left-1 {
+	margin-left: 0.6rem !important;
+}
+
+.margin-top-1 {
+	margin-top: 0.5rem !important;
+}
+
+/** icons validation **/
+.validated #icon-warning,
+.validated #icon-error,
+.warning #icon-validated,
+.warning #icon-error,
+.error #icon-validated,
+.error #icon-warning {
+	display: none;
+}
+
+#icon-validated {
+	filter: hue-rotate(280deg) brightness(180%);
+}
+#icon-warning {
+	filter: hue-rotate(178.5deg) brightness(300%) saturate(2000%);
+}
+#icon-error {
+	filter: hue-rotate(100deg);
+}
+
+#icon-validated,
+#icon-warning,
+#icon-error {
+	display: inline-flex;
 }
 
