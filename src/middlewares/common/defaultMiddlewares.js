@@ -11,12 +11,13 @@ const defaultMiddlewares = {
 	postDocument: async (apiRoute, body) => {
 		const url = `${apiUrl}/${apiRoute}`;
 		const method = 'POST';
-		body = JSON.stringify(body);
-		const response = await fetch(url, { headers, method, body }).then(
-			(res) => {
-				return res.json();
-			}
-		);
+		const response = await fetch(url, {
+			headers,
+			method,
+			body: JSON.stringify(body),
+		}).then((res) => {
+			return res.json();
+		});
 		return response;
 	},
 
@@ -74,12 +75,13 @@ const defaultMiddlewares = {
 	putDocument: async (apiRoute, id, body) => {
 		const url = `${apiUrl}/${apiRoute}/${id}`;
 		const method = 'PUT';
-		body = JSON.stringify(body);
-		const response = await fetch(url, { headers, method, body }).then(
-			(res) => {
-				return res.json();
-			}
-		);
+		const response = await fetch(url, {
+			headers,
+			method,
+			body: JSON.stringify(body),
+		}).then((res) => {
+			return res.json();
+		});
 		return response;
 	},
 

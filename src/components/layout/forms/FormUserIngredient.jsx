@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../../App';
 import './forms.css';
 
-function FormAddIngredient(props) {
+function FormUserIngredient(props) {
 	const [ingredientName, setIngredientName] = useState();
 	const [ingredientQuantity, setIngredientQuantity] = useState();
 	const [quantityStep, setQuantityStep] = useState(0.001);
+	const { userLogin } = useContext(AuthContext);
 
 	useEffect(() => {
-		console.log('cmpt/layout/forms/formAddIngredient #useEffect');
+		console.log('cmpt/layout/forms/FormUserIngredient #useEffect');
 		switch (true) {
 			case ingredientQuantity < 1:
 				setQuantityStep(0.001);
@@ -29,19 +31,9 @@ function FormAddIngredient(props) {
 		}
 	}, [ingredientQuantity]);
 
-	const submitIngredient = (event) => {
-		event.preventDefault();
-		console.log(
-			'components forms formAddIngredient JSX #submitIngredient ingredientName : ingredientQuantity >>>',
-			ingredientName,
-			':',
-			ingredientQuantity
-		);
-	};
-
 	const handleChange = (event) => {
 		console.log(
-			'components forms formAddIngredient JSX #handleChange event.target.value >>>',
+			'components forms FormUserIngredient JSX #handleChange event.target.value >>>',
 			event.target.value,
 			'=',
 			event.target.name
@@ -58,7 +50,7 @@ function FormAddIngredient(props) {
 
 	return (
 		<>
-			<form onSubmit={submitIngredient}>
+			<form onSubmit={props.submitIngredient}>
 				<label htmlFor="ingredient-name">
 					Name:
 					<select
@@ -71,7 +63,7 @@ function FormAddIngredient(props) {
 						<option value=""></option>
 						{props.ingredients.map((ingredient, index) => {
 							return (
-								<option key={index} value={ingredient.name}>
+								<option key={index} value={ingredient._id}>
 									{ingredient.name}
 								</option>
 							);
@@ -98,4 +90,4 @@ function FormAddIngredient(props) {
 	);
 }
 
-export default FormAddIngredient;
+export default FormUserIngredient;

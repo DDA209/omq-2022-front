@@ -24,8 +24,6 @@ function FormUserIdentification(props) {
 	const { formStep, setFormStep, userIdentification, setUserIdentification } =
 		props;
 	const { userLogin, setUserLogin } = useContext(AuthContext);
-	console.log('AuthContext userLogin', userLogin);
-	// console.log('userIdentification', userIdentification);
 	const handleChange = (event) => {
 		switch (event.target.name) {
 			case 'email':
@@ -69,7 +67,6 @@ function FormUserIdentification(props) {
 	};
 
 	const handleClickLoginRegister = async (step) => {
-		console.log('clic handleClickLoginRegister');
 		if (step === 'login') {
 			return setFormStep('login');
 		} else if (step === 'register') {
@@ -82,11 +79,6 @@ function FormUserIdentification(props) {
 				return;
 			} else {
 				setFormStep('register');
-				// setUserIdentification({
-				// 	...userIdentification,
-				// 	emailConfirmation: ['', false],
-				// 	passwordConfirmation: ['', false],
-				// });
 				return;
 			}
 		}
@@ -94,7 +86,6 @@ function FormUserIdentification(props) {
 
 	const handleClicValidate = async (step) => {
 		let err = '';
-		console.log('clic handleClicValidate -', step);
 		const identification = {
 			email: userIdentification.email[0],
 			password: userIdentification.password[0],
@@ -111,36 +102,32 @@ function FormUserIdentification(props) {
 			});
 
 			if (!response.success) {
-				console.log('Auth', step, 'error', response.data);
-				console.log('Auth', step, 'error');
-				err = response.data;
 			} else {
 				modalContent('register');
-				console.log(
-					'components/layout/forms/FormUserIdentification #handleClicValidate',
-					response
-				);
 				return;
 			}
 		} else if (step === 'login') {
-			console.log('#1');
-
 			const response = await postDocument(
 				'users/user/login',
 				identification
 			);
 			if (!response.success) {
-				console.log('#2');
-
-				console.log('Auth', step, 'error', response.data);
-				console.log('Auth', step, 'error');
 				err = response.data;
 			} else {
-				console.log('#3');
-				setUserLogin({
+				console.log('USER LOGIN response >>>', response.data);
+				const {
+					_id: userId,
+					email: userEmail,
+					isAdmin,
+				} = response.data;
+				const user = {
+					userId,
+					userEmail,
 					isLogged: true,
-					isAdmin: response.data.isAdmin,
-				});
+					isAdmin,
+				};
+				setUserLogin(user);
+				localStorage.setItem('userLogin', JSON.stringify(user));
 			}
 		}
 		modalContent('error', err);
@@ -148,24 +135,41 @@ function FormUserIdentification(props) {
 	};
 
 	const handleClicBack = (step) => {
-		const password = [userIdentification.password[0], false];
+		// const password = [userIdentification.password[0], false];
 		const passwordConfirmation = ['', false];
 		const emailConfirmation = ['', false];
-		console.log('back', userIdentification);
-		console.log('back PASSWORD', userIdentification.password[0]);
 		setUserIdentification({
 			...userIdentification,
-			password,
+			// password,
 			passwordConfirmation,
 			emailConfirmation,
 		});
 		setFormStep(null);
-		console.log('clic handleClicBack');
+	};
+
+	const handleClickModal = (step) => {
+		setModal({ ...modal, status: 'hidden' });
+		if (step === 'register') {
+			setUserIdentification({
+				email: [userIdentification.email[0].toLowerCase(), true],
+				password: [userIdentification.password[0], true],
+				emailConfirmation: ['', false],
+				passwordConfirmation: ['', false],
+			});
+			setFormStep('login');
+		}
+		if (step === 'register') {
+			setUserIdentification({
+				email: [userIdentification.email[0].toLowerCase(), true],
+				password: [userIdentification.password[0], true],
+				emailConfirmation: ['', false],
+				passwordConfirmation: ['', false],
+			});
+			setFormStep('login');
+		}
 	};
 
 	const modalContent = (step, message) => {
-		console.log('modalContent step >>>', step);
-		console.log('modalContent message >>>', message);
 		const status = '';
 		const content = (
 			<>
@@ -195,22 +199,14 @@ function FormUserIdentification(props) {
 					</>
 				)}
 
-				<button
-					onClick={() => {
-						setModal({ ...modal, status: 'hidden' });
-						setUserIdentification({
-							email: [
-								userIdentification.email.toLowerCase(),
-								true,
-							],
-							password: ['', false],
-							emailConfirmation: ['', false],
-							passwordConfirmation: ['', false],
-						});
-						setFormStep('login');
-					}}
-				>
-					{step === 'error' ? 'Retry' : <Link to="/">Continue</Link>}
+				<button onClick={() => handleClickModal(step)}>
+					{step === 'error' ? (
+						'Retry'
+					) : step === 'login' ? (
+						<Link to="/">Continue</Link>
+					) : (
+						'continue'
+					)}
 				</button>
 			</>
 		);
@@ -331,12 +327,6 @@ function FormUserIdentification(props) {
 							(step, index) => {
 								const [stepKey, stepValue] =
 									Object.entries(step)[0];
-								console.log(
-									'Object.entries(step)',
-									Object.entries(step)
-								);
-								console.log('stepKey', stepKey);
-								console.log('stepValue', stepValue);
 								return (
 									<Fragment key={index}>
 										{index !== 0 && (

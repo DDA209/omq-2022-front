@@ -5,14 +5,12 @@ import { Routes, Route } from 'react-router-dom';
 import AdminView from '../views/admin/Admin.view';
 import CaculateMenusView from './../views/caculateMenus/CalculateMenus.view';
 import HomeView from './../views/home/Home.view';
-import IngredientsListView from './../views/ingrdientsList/IngredientLists.view';
+import IngredientsListView from '../views/ingrdientsList/IngredientsList.view';
 import LoginView from '../views/user/Login.view';
 
 function AppRoutes() {
 	const { userLogin } = useContext(AuthContext);
 	const { isAdmin, isLogged } = userLogin;
-	console.log('APPROUTES useContext(AuthContext)', useContext(AuthContext));
-	console.log('APPROUTES isLogged', isLogged);
 
 	return (
 		<Routes>

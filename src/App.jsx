@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import NavBar from './views/navBar/NavBar.view';
@@ -10,6 +10,8 @@ export const AuthContext = createContext({});
 
 function App() {
 	const [userLogin, setUserLogin] = useState({
+		userId: '',
+		userEmail: '',
 		isLogged: false,
 		isAdmin: false,
 	});
@@ -18,13 +20,20 @@ function App() {
 		const localStorageUserLogin = JSON.parse(
 			localStorage.getItem('userLogin')
 		);
-
-		localStorageUserLogin && setUserLogin(localStorageUserLogin);
+		if (localStorageUserLogin) {
+			setUserLogin(localStorageUserLogin);
+		} else {
+			localStorage.setItem(
+				'userLogin',
+				JSON.stringify({
+					userId: '',
+					userEmail: '',
+					isLogged: false,
+					isAdmin: false,
+				})
+			);
+		}
 	}, []);
-
-	useEffect(() => {
-		localStorage.setItem('userLogin', JSON.stringify(userLogin));
-	}, [userLogin]);
 
 	return (
 		<BrowserRouter>

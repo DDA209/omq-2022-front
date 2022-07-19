@@ -1,0 +1,22 @@
+.card {
+	border-radius: 12px;
+	background-color: var(--background-color);
+	padding: 0.1rem 0.5rem 0.2rem;
+	margin: 0.5rem 0;
+}
+
+.card h4 {
+	text-align: center;
+}
+
+.card .quantity {
+	text-align: right;
+}
+
+.card > article section {
+	margin: 0.5rem 0.25rem 0.2rem;
+	padding: 0.1rem 0.5rem 0.2rem;
+	height: 5rem;
+	background-color: var(--secondary-color);
+	border-radius: 9px;
+}

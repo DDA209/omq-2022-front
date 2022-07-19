@@ -1,7 +1,7 @@
 nav {
-	background-color: #f4c008ff;
+	background-color: var(--secondary-color);
 	border-radius: 12px;
-	border: #832d1eff double 9px;
+	border: var(--text-color) double 9px;
 	padding: 0px;
 	margin: 1rem 1rem 0;
 	text-align: center;
@@ -9,14 +9,14 @@ nav {
 
 nav > div {
 	display: flex;
-	background-color: #ffffffd0;
+	background-color: var(--background-color);
 	padding: calc(1rem - 0px);
 	border-radius: 3px;
 }
 
 nav h2 {
 	display: inline;
-	margin: -0.4 rem 0;
+	margin: -0.4rem 0 0 -0.4rem;
 	text-align: start;
 	flex-shrink: 1;
 }
@@ -40,9 +40,11 @@ nav #nav-items > a {
 
 button,
 nav .nav-small-item,
-nav .nav-item {
-	background-color: #f4c008ff;
-	border: solid 3px #832d1eff;
+nav .nav-item,
+.led-button,
+.card {
+	background-color: var(--secondary-color);
+	border: solid 3px var(--text-color);
 	box-shadow: 0.1rem 0.2rem 0.15rem -0.05rem #00000080;
 	transition: ease-out 0.185s transform, ease-out 0.185s box-shadow;
 }
@@ -52,9 +54,19 @@ nav .nav-item {
 	width: 5rem;
 	border-radius: 50%;
 }
-
+nav .nav-item,
 nav .nav-small-item {
-	border: #832d1eff double 9px;
+	margin-bottom: 0.5rem;
+}
+
+.led-button {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+nav .nav-small-item,
+.led-button {
+	border: var(--text-color) double 9px;
 	height: 1rem;
 	width: 1rem;
 	border-radius: 50%;
@@ -63,61 +75,99 @@ nav .nav-small-item {
 	justify-content: center;
 }
 
-nav .nav-small-item > div {
+nav .nav-small-item > div,
+.led-button > div {
 	height: 1rem;
 	width: 1rem;
 	border-radius: 50%;
+	background-color: #ffffffff;
+}
+
+nav .nav-small-item > div,
+.led-button > .inactive {
 	box-shadow: 0 0 0.4rem 0.05rem #ff2c3eff inset,
 		0 0 1.25rem 0.25rem #ff2c3eff;
-
-	background-color: #ffffffff;
-	animation: infinite ease-in-out 2s alternate red-button;
+	animation: infinite ease-in-out 0.5s alternate red-button;
 }
 
 nav .nav-small-item > div:hover,
-nav a:hover .nav-small-item > div {
+nav a:hover .nav-small-item > div,
+.led-button > div:hover {
 	animation: none;
 }
 
 nav .nav-small-item > div:active,
-nav a:active .nav-small-item > div {
-	box-shadow: 0 0 0.4rem 0.05rem #c00000ff inset,
+nav a:active .nav-small-item > div,
+.led-button > .inactive:active {
+	box-shadow: 0 0 0.4rem 0.05rem #000000e0 inset,
 		0 0 1.25rem 0.25rem #ff2c3e00;
 	background-color: #800000ff;
 	animation: none;
 }
 
-nav .nav-small-item > .led-logged {
-	box-shadow: 0 0 0.3rem 0.1rem #57ff15ff inset, 0 0 1.25rem 0.25rem #57ff15ff !important;
-	animation: none !important;
+.led-button > .alert {
+	box-shadow: 0 0 0.3rem 0.1rem #ffdc15ff inset, 0 0 1.25rem 0.25rem #ffdc15ff;
+	animation: infinite ease-in-out 0.6s alternate yellow-button;
 }
-nav .nav-small-item > .led-logged:active,
-nav a:active .nav-small-item > .led-logged {
-	box-shadow: 0 0 0.3rem 0.1rem #2bc010ff inset, 0 0 1.25rem 0.25rem #57ff1500 !important;
-	background-color: #008000ff !important;
 
-	animation: none !important;
+.led-button:active > .alert {
+	box-shadow: 0 0 0.4rem 0.05rem #000000e0 inset,
+		0 0 1.25rem 0.25rem #ffdc1500;
+	background-color: rgb(141, 132, 0);
+	animation: none;
+}
+
+nav .nav-small-item > .led-logged,
+.led-button > .active {
+	box-shadow: 0 0 0.3rem 0.1rem #57ff15ff inset, 0 0 1.25rem 0.25rem #57ff15ff;
+	animation: none;
+}
+
+nav .nav-small-item > .led-logged:active,
+nav a:active .nav-small-item > .led-logged,
+.led-button > .active:active,
+.led-button:active > .active {
+	box-shadow: 0 0 0.3rem 0.1rem #000000e0 inset, 0 0 0.3rem 0.1rem #00400000;
+	background-color: #008000ff;
+	animation: none;
 }
 
 button:hover,
 nav a:hover .nav-small-item,
-nav a:hover .nav-item {
+nav a:hover .nav-item,
+.led-button:hover {
 	transform: translateY(-0.1rem) translateX(-0.1rem);
 	box-shadow: 0.2rem 0.4rem 0.25rem -0.1rem #00000080;
 }
 button:active,
 nav a:active .nav-small-item,
-nav a:active .nav-item {
+nav a:active .nav-item,
+.led-button:active,
+.card:hover {
 	transform: translateY(0.1rem) translateX(0.1rem);
 	box-shadow: 0rem 0rem 0rem 0rem #00000080,
 		0.05rem 0.05rem 0.1rem -0.05rem #00000080 inset;
+}
+
+nav a #user {
+	position: absolute;
+	display: none;
+	font-size: small;
+	background: none;
+	color: #832d1e00;
+	transform: translateY(calc(2.6rem + 19px + 2vmin));
+}
+
+nav a:hover #user {
+	display: inline;
+	color: var(--text-color) !important;
 }
 
 nav #admin-items {
 	display: grid;
 }
 
-.big-button:hover {
+.big-button:hover .small-button:hover {
 	background-color: #00000000 !important;
 }
 
@@ -128,8 +178,34 @@ nav #admin-items {
 		background-color: #ffffff;
 	}
 	25% {
-		box-shadow: 0 0 0.4rem 0.05rem #c00000ff inset,
-			0 0 1.25rem 0.25rem #ff2c3e00;
-		background-color: #800000ff;
+		box-shadow: 0 0 0.4rem 0.05rem #ef0000ff inset,
+			0 0 1.25rem 0.25rem #ef0000ff;
+		background-color: #ffefefff;
+	}
+}
+
+@keyframes yellow-button {
+	0% {
+		box-shadow: 0 0 0.4rem 0.05rem #ffdc15ff inset,
+			0 0 1.25rem 0.25rem #ffdc15ff;
+		background-color: #ffffff;
+	}
+	25% {
+		box-shadow: 0 0 0.4rem 0.05rem #f8d507ff inset,
+			0 0 1.25rem 0.25rem #f8d507ff;
+		background-color: #ffefefff;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	nav {
+		margin-left: calc(50vw - (1280px / 2) + 1rem);
+		margin-right: calc(50vw - (1280px / 2) + 1rem);
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	nav h2 {
+		display: None;
 	}
 }

@@ -1,0 +1,6 @@
+:root {
+	--text-color: #832d1eff; /*  83 2d 1e ff   var(--text-color)*/
+	--main-background-color: #fefbefff; /*  fe fb ef ff   var(--main-background-color)*/
+	--background-color: #fdf3d1ff; /*  fd f3 d1 ff   var(--background-color)*/
+	--secondary-color: #f4c008ff; /*  f4 c0 08 ff   var(--secondary-color)*/
+}

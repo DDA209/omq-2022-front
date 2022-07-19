@@ -3,20 +3,10 @@ import { AuthContext } from '../../App';
 import { Link } from 'react-router-dom';
 
 import './navBar.css';
+import userUpdate from '../../utils/userUpdate';
 
 function NavBarView() {
 	const { userLogin, setUserLogin } = useContext(AuthContext);
-	console.log('NavBarView useContext(AuthContext)', useContext(AuthContext));
-
-	const onClickLogin = () => {
-		setUserLogin({ ...userLogin, isLogged: true, isAdmin: false });
-		console.log('Clic');
-	};
-
-	const onClickAdmin = () => {
-		setUserLogin({ ...userLogin, isLogged: true, isAdmin: true });
-		console.log('Clic');
-	};
 
 	const renderAdmin = () => {
 		return (
@@ -44,18 +34,26 @@ function NavBarView() {
 					<span>Login / Signin</span>
 				</Link>
 			);
-		} else {
+		} else if (userLogin?.isLogged) {
 			return (
 				<a
 					className="big-button"
 					onClick={() => {
 						setUserLogin({ isLogged: false, isAdmin: false });
+						localStorage.clear('userLogin');
+						userUpdate({
+							userId: '',
+							userEmail: '',
+							isLogged: false,
+							isAdmin: false,
+						});
 					}}
 				>
 					<div className="nav-small-item">
 						<div className="led-logged"></div>
 					</div>
 					<span>Logout</span>
+					{userLogin && <span id="user">{userLogin.userEmail}</span>}
 				</a>
 			);
 		}
@@ -67,7 +65,7 @@ function NavBarView() {
 				<h2>
 					<Link to="/">OMQ</Link>
 				</h2>
-				{!userLogin?.isLogged && (
+				{/* {!userLogin?.isLogged && (
 					<span
 						type="button"
 						className="btn btn-primary"
@@ -84,7 +82,7 @@ function NavBarView() {
 					>
 						Admin
 					</span>
-				)}
+				)} */}
 				<div id="nav-items">
 					<Link
 						className="big-button"

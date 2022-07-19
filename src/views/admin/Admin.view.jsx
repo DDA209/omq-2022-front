@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../App';
 // import FormManageIngredients from '../../components/layout/forms/FormManageIngredients';
 import ManageIngredients from './ManageIngredients.view';
+import ManageUsers from './ManageUsers.view';
 
 function AdminView(props) {
 	const { userLogin } = useContext(AuthContext);
@@ -14,26 +15,23 @@ function AdminView(props) {
 	const renderView = (view, index) => {
 		if (view === 'manageIngredients') {
 			return (
-				<div key={index}>
+				<div key="index">
 					<hr />
 					<h2>Manage ingredients</h2>
-					{renderAllIngredients()}
+					<ManageIngredients />
+				</div>
+			);
+		} else if (view === 'manageUsers') {
+			return (
+				<div key="index">
+					<hr />
+					<h2>Manage users</h2>
+					<ManageUsers />
 				</div>
 			);
 		} else {
 			renderNoView();
 		}
-	};
-
-	const renderAllIngredients = () => {
-		return (
-			<>
-				<ManageIngredients
-				// ingredientsAll="ingredientsAll"
-				// getAllIngredients={getAllIngredients}
-				/>
-			</>
-		);
 	};
 
 	return (

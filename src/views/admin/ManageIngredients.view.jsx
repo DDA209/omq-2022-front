@@ -94,7 +94,7 @@ function ManageIngredientsView() {
 		getAllIngredients();
 	};
 
-	const destroyIngredient = async (id, index) => {
+	const destroyIngredient = async (id) => {
 		const response = await destroyDocument(
 			'ingredients/destroy/ingredient',
 			id
