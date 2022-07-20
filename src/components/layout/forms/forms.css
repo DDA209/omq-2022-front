@@ -78,3 +78,7 @@ form.user-management > fieldset {
 	align-items: center;
 	width: 7rem;
 }
+
+input.ingredient-quantity {
+	width: 125px;
+}

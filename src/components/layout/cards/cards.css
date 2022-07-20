@@ -14,9 +14,22 @@
 }
 
 .card > article section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin: 0.5rem 0.25rem 0.2rem;
 	padding: 0.1rem 0.5rem 0.2rem;
 	height: 5rem;
 	background-color: var(--secondary-color);
 	border-radius: 9px;
+}
+
+.card article input.ingredient-quantity {
+	margin-left: 0;
+}
+.card article section.ingredient-quantity {
+	margin: 0 0.25 !important;
+	padding: 0 !important;
+	background-color: var(--background-color) !important;
+	height: auto !important;
 }
